@@ -1,0 +1,4 @@
+*** Superstore Changelog ***
+
+2013.03.19 - version 1.0.0
+ * First release!
