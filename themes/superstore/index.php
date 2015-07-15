@@ -41,7 +41,6 @@ if ( ! function_exists( 'wp' ) && ! empty( $_SERVER['SCRIPT_FILENAME'] ) && base
 ?>
 
     <div id="content" class="col-full">
-
     	<?php woo_main_before(); ?>
 
     	<div class="woocommerce woocommerce-wrap woocommerce-columns-4">
@@ -65,56 +64,13 @@ if ( ! function_exists( 'wp' ) && ! empty( $_SERVER['SCRIPT_FILENAME'] ) && base
 	    		}
 	    	?>
 		</div><!--/.woocommerce-->
-<?php if ( 'true' == $settings['homepage_enable_content'] ) { ?>
-		<section id="main" class="<?php echo esc_attr( $layout_class ); ?>">
-		<?php woo_loop_before(); ?>
-<?php
-	if ( 'page' == $settings['homepage_content_type'] && 0 < intval( $settings['homepage_page_id'] ) ) {
-		global $post;
-		$post = get_page( intval( $settings['homepage_page_id'] ) );
-		setup_postdata( $post );
-		get_template_part( 'content', 'page' );
-		wp_reset_postdata();
-	} else {
-?>
-		<?php
-        	if ( have_posts() ) : $count = 0;
-        ?>
-
-			<?php /* Start the Loop */ ?>
-			<?php while ( have_posts() ) : the_post(); $count++; ?>
-
-				<?php
-					/* Include the Post-Format-specific template for the content.
-					 * If you want to overload this in a child theme then include a file
-					 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
-					 */
-					get_template_part( 'content', get_post_format() );
-				?>
-
-			<?php endwhile; ?>
-
-		<?php else : ?>
-
-            <article <?php post_class(); ?>>
-                <p><?php _e( 'Sorry, no posts matched your criteria.', 'woothemes' ); ?></p>
-            </article><!-- /.post -->
-
-        <?php endif; ?>
-<?php } ?>
-        <?php woo_loop_after(); ?>
-
-		<?php
-			if ( 'posts' == $settings['homepage_content_type'] ) {
-				woo_pagenav();
-			}
-		?>
+<?php if ( 'true' == $settings['homepage_enable_content'] ): ?>
+		<section class="woocommerce woocommerce-wrap woocommerce-columns-4">
+		
 
 		</section><!-- /#main -->
-<?php } ?>
+<?php endif; ?>
 		<?php woo_main_after(); ?>
-
-        <?php if ( 'true' == $settings['homepage_posts_sidebar'] ) { get_sidebar(); } ?>
 
     </div><!-- /#content -->
 
